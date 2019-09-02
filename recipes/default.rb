@@ -46,7 +46,7 @@ end
 
 template '/etc/hosts' do
   source 'hosts.erb'
-  mode '0600'
+  mode '0755'
   owner 'root'
   group 'root'
 end

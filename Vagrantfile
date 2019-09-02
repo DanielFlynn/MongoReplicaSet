@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     db.vm.provision "chef_solo" do |chef|
       chef.add_recipe "mongodb::default"
       chef.arguments = "--chef-license accept"
-    db.vm.provision "shell", path: "environment/db/provision.sh", privileged: false
+    db.vm.provision "shell", path: "environment/db/provision.js", privileged: false
   end
 end
   config.vm.define "Mongo2" do |db|
