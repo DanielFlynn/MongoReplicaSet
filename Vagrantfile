@@ -6,15 +6,14 @@ end
 
 Vagrant.configure("2") do |config|
 
-  config.vm.define "Mongo1" do |db|
+  config.vm.define "Mongo3" do |db|
     db.vm.box = "ubuntu/xenial64"
-    db.vm.hostname = "Mongo1"
-    db.vm.network "private_network", ip: "192.168.1.2"
+    db.vm.hostname = "Mongo3"
+    db.vm.network "private_network", ip: "192.168.1.4"
     db.vm.synced_folder "environment/db", "/home/ubuntu/environment"
     db.vm.provision "chef_solo" do |chef|
       chef.add_recipe "mongodb::default"
       chef.arguments = "--chef-license accept"
-    db.vm.provision "shell", path: "environment/db/provision.js", privileged: false
   end
 end
   config.vm.define "Mongo2" do |db|
@@ -27,14 +26,15 @@ end
       chef.arguments = "--chef-license accept"
   end
 end
-  config.vm.define "Mongo3" do |db|
+  config.vm.define "Mongo1" do |db|
     db.vm.box = "ubuntu/xenial64"
-    db.vm.hostname = "Mongo3"
-    db.vm.network "private_network", ip: "192.168.1.4"
+    db.vm.hostname = "Mongo1"
+    db.vm.network "private_network", ip: "192.168.1.2"
     db.vm.synced_folder "environment/db", "/home/ubuntu/environment"
     db.vm.provision "chef_solo" do |chef|
       chef.add_recipe "mongodb::default"
       chef.arguments = "--chef-license accept"
+    db.vm.provision "shell", path: "environment/db/mongo.sh", privileged: false
 
 end
 end
